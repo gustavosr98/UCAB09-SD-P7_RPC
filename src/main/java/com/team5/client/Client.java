@@ -1,4 +1,4 @@
-package com.team5;
+package com.team5.client;
 
 public class Client {
     public static void main( String[] args ){
