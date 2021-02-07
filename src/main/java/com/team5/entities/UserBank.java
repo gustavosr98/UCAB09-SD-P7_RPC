@@ -9,11 +9,8 @@ import java.util.List;
 public class UserBank {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
-    private int id;
-
-    @Column(name="document_id", nullable=false, unique=true)
-    private String documentId;
+    @Column(name="document_id")
+    private int documentId;
 
     @Column(name="name", nullable=false)
     private String name;
@@ -27,29 +24,17 @@ public class UserBank {
     @OneToMany(mappedBy="userBank")
     private List<Account> accounts;
 
-    public UserBank(String documentId, String name, String username, String password) {
-        this.documentId = documentId;
+    public UserBank(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = password;
     }
 
-    public UserBank() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDocumentId() {
+    public int getDocumentId() {
         return documentId;
     }
 
-    public void setDocumentId(String documentId) {
+    public void setDocumentId(int documentId) {
         this.documentId = documentId;
     }
 

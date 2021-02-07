@@ -1,6 +1,8 @@
 package com.team5.server;
 
 import com.team5.entities.Person;
+import com.team5.entities.UserBank;
+import com.team5.entities.Account;
 
 public class Server {
   public static void main( String[] args ) throws Exception {
@@ -17,10 +19,6 @@ public class Server {
     System.out.println(personToGet.getName()); 
 
     printRunningMessage();
-
-    UserBankService userBankService = new UserBankService();
-    System.out.println(userBankService.getByUserName("test").getName());
-    System.out.println(userBankService.getByUserName("HOLA").getName());
   }
 
   private static void printRunningMessage(){

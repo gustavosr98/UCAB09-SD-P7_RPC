@@ -9,10 +9,7 @@ import java.util.List;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
-    private int id;
-
-    @Column(name="number", nullable=false)
+    @Column(name="number")
     private int number;
 
     @Column(name="current_balance", nullable=false)
@@ -28,21 +25,12 @@ public class Account {
     @OneToMany(mappedBy="destinationAccount")
     private List<Transaction> incomeTransactions;
 
-    public Account(int number, float currentBalance, UserBank userBank) {
-        this.number = number;
+    public Account(float currentBalance, UserBank userBank) {
         this.currentBalance = currentBalance;
         this.userBank = userBank;
     }
 
     public Account() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getNumber() {
