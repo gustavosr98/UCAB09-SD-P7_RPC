@@ -3,6 +3,8 @@ package com.team5.server;
 
 import java.io.File;
 
+import com.team5.entities.Person;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -11,8 +13,10 @@ public class HibernateUtil {
   
   static {
     try {
-      Configuration cfg = new Configuration().configure();
-
+      Configuration cfg = new Configuration().configure()
+        .addAnnotatedClass(Person.class)
+      ;
+      
       sessionFactory = cfg.buildSessionFactory();
     } catch (Throwable ex) {
       ex.printStackTrace();

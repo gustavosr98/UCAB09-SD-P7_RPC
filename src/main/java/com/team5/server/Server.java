@@ -1,10 +1,21 @@
 package com.team5.server;
 
-import org.hibernate.SessionFactory;
+import com.team5.entities.Person;
 
 public class Server {
   public static void main( String[] args ){
-    SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    printRunningMessage();
+    Service <Person> userService = new Service<Person>(Person.class);
+    Person personToInsert = new Person("Gustavo Sanchez", "Tato");
+
+    // INSERT
+    userService.insert(personToInsert);
+    // GET
+    Person personToGet = userService.get(personToInsert.getId());
+
+    System.out.println(personToInsert.getName()); 
+    System.out.println(personToGet.getName()); 
+
     printRunningMessage();
   }
 

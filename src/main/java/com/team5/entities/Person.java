@@ -1,5 +1,6 @@
 package com.team5.entities;
 
+import java.util.Random;
 import javax.persistence.*;
 
 @Entity
@@ -25,6 +26,7 @@ public class Person {
     private String date;
 
     public Person(String name, String surname) {
+        this.id = new Random().nextInt(999999999);
         this.name = name;
         this.surname = surname;
     }
