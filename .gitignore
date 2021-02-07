@@ -30,3 +30,6 @@ dependency-reduced-pom.xml
 
 # Compiler
 .mvn/*
+
+# Project
+hibernate.cfg.xml

@@ -17,7 +17,7 @@
 # Run
 ```bash 
   mvn compile
-  mvn exec:java -Dexec.mainClass=com.team5.Server
+  mvn exec:java
   mvn exec:java -Dexec.mainClass=com.team5.Client
 ```
 
