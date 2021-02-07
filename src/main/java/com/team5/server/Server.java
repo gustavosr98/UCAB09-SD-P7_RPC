@@ -17,6 +17,9 @@ public class Server {
     System.out.println(personToGet.getName()); 
 
     printRunningMessage();
+
+    UserBankService userBankService = new UserBankService();
+    userBankService.getUserByDocumentId("hola");
   }
 
   private static void printRunningMessage(){

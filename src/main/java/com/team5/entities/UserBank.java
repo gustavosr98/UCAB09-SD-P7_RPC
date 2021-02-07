@@ -12,7 +12,7 @@ public class UserBank {
     @Column(name="id")
     private int id;
 
-    @Column(name="document_id", nullable=false)
+    @Column(name="document_id", nullable=false, unique=true)
     private String documentId;
 
     @Column(name="name", nullable=false)
