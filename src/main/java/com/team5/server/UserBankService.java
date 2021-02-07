@@ -11,29 +11,15 @@ import org.hibernate.criterion.Restrictions;
 
 public class UserBankService {
     private Class<UserBank> type;
-    public void getUserByDocumentId(String documentId) throws Exception {
-        Service <UserBank> userBankService = new Service<UserBank>(UserBank.class);
 
-        UserBank userBank = get(documentId);
-
-        System.out.println(userBank);
-    }
-
-    public UserBank get(String documentId) throws Exception {
+    public UserBank getByUserName(String username) throws Exception {
         Transaction transaction = null;
 
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Session session = HibernateUtil.getSessionFactory().openSession();
             Criteria cr = session.createCriteria(UserBank.class);
-            cr.add(Restrictions.eq("document_id", documentId));
-            return cr.uniqueResult();
-            //Session session = HibernateUtil.getSessionFactory().openSession();
-            //return (UserBank) session.load(this.type, documentId);
-
-            //Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            //Query query = session.createQuery("from user_bank where documen_id=:documentId");
-            //query.setParameter("documentId", documentId);
-            //return (UserBank) query.uniqueResult();
+            cr.add(Restrictions.eq("username", username));
+            return (UserBank) cr.uniqueResult();
 
         } catch (Exception e) {
             if (transaction != null) {

@@ -19,7 +19,8 @@ public class Server {
     printRunningMessage();
 
     UserBankService userBankService = new UserBankService();
-    userBankService.getUserByDocumentId("hola");
+    System.out.println(userBankService.getByUserName("test").getName());
+    System.out.println(userBankService.getByUserName("HOLA").getName());
   }
 
   private static void printRunningMessage(){
