@@ -12,16 +12,16 @@ public class UserBank {
     @Column(name="id")
     private int id;
 
-    @Column(name="document_id")
+    @Column(name="document_id", nullable=false)
     private String documentId;
 
-    @Column(name="name")
+    @Column(name="name", nullable=false)
     private String name;
 
-    @Column(name="username")
+    @Column(name="username", nullable=false)
     private String username;
 
-    @Column(name="password")
+    @Column(name="password", nullable=false)
     private String password;
 
     @OneToMany(mappedBy="userBank")

@@ -12,14 +12,14 @@ public class Account {
     @Column(name="id")
     private int id;
 
-    @Column(name="number")
+    @Column(name="number", nullable=false)
     private int number;
 
-    @Column(name="current_balance")
+    @Column(name="current_balance", nullable=false)
     private float currentBalance;
 
     @ManyToOne()
-    @JoinColumn(name="fk_user")
+    @JoinColumn(name="fk_user", nullable=false)
     private UserBank userBank;
 
     @OneToMany(mappedBy="sourceAccount")

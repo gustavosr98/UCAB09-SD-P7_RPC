@@ -7,22 +7,29 @@ import java.util.Date;
 @Entity
 @Table(name = "transaction")
 public class Transaction {
+    enum Type {
+        DEPOSIT,
+        WITHDRAWAL,
+        TRANSFERENCE
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private int id;
 
-    @Column(name="amount")
+    @Column(name="amount", nullable=false)
     private float amount;
 
-    @Column(name= "date")
+    @Column(name= "date", nullable=false)
     private Date date;
 
-    @Column(name="description")
+    @Column(name="description", nullable=false)
     private String description;
 
-    @Column(name="type")
-    private String type;
+    @Column(name="type", nullable=false)
+    @Enumerated(EnumType.STRING)
+    private Type type;
 
     @ManyToOne()
     @JoinColumn(name="fk_source_account", nullable=true)
@@ -32,7 +39,7 @@ public class Transaction {
     @JoinColumn(name="fk_destination_account", nullable=true)
     private Account destinationAccount;
 
-    public Transaction(float amount, Date date, String description, String type, Account sourceAccount, Account destinationAccount) {
+    public Transaction(float amount, Date date, String description, Type type, Account sourceAccount, Account destinationAccount) {
         this.amount = amount;
         this.date = date;
         this.description = description;
@@ -76,11 +83,11 @@ public class Transaction {
         this.description = description;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
