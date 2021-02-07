@@ -1,21 +1,31 @@
 package com.team5.server;
 
+import java.rmi.AlreadyBoundException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.team5.entities.Person;
+import com.team5.rmiinterfaces.Hola;
+
 
 public class Server {
-  public static void main( String[] args ) throws Exception {
-    printRunningMessage();
-    Service <Person> userService = new Service<Person>(Person.class);
-    Person personToInsert = new Person("Gustavo Sanchez", "Tato");
-
-    // INSERT
-    userService.insert(personToInsert);
-    // GET
-    Person personToGet = userService.get(personToInsert.getId());
-
-    System.out.println(personToInsert.getName()); 
-    System.out.println(personToGet.getName()); 
-
+  
+  public static void main( String[] args ) throws Exception, RemoteException, AlreadyBoundException {
+    try {
+      Remote comp = new HolaImpl();
+      Registry registry = LocateRegistry.getRegistry();
+      UnicastRemoteObject.exportObject((Remote) comp, 0);
+      
+      registry.rebind("objetoHola", comp);
+    } catch (RemoteException ex) {
+      ex.printStackTrace();
+      return;
+    }
     printRunningMessage();
   }
 
