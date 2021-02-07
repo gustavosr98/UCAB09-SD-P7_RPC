@@ -9,7 +9,7 @@ public class Client {
   public static void main(String[] args) {
     try {
       Registry registry = LocateRegistry.getRegistry();
-      Hola comp = (Hola) registry.lookup("objetoHola");
+      Hola comp = (Hola) registry.lookup("Hola");
       System.out.println( "The return value from the server is: " + comp.saluda() );
     } catch (Exception e) {
       System.err.println( "Exception while trying to echo:" );

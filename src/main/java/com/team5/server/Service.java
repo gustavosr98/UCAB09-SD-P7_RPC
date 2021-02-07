@@ -1,6 +1,5 @@
 package com.team5.server;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -9,7 +8,9 @@ import java.util.List;
 public class Service<Entity> {
   private Class<Entity> type;
 
-  public Service(Class<Entity> type) { this.type = type; }
+  public Service(Class<Entity> type) {
+    this.type = type;
+  }
 
   public void insert(Entity entity) throws Exception {
     Transaction transaction = null;
@@ -29,13 +30,13 @@ public class Service<Entity> {
     }
   }
 
-  public List <Entity> getAll() throws Exception {
+  public List<Entity> getAll() throws Exception {
     Transaction transaction = null;
 
     try {
       Session session = HibernateUtil.getSessionFactory().openSession();
       return session.createCriteria(this.type).list();
-    
+
     } catch (Exception e) {
       if (transaction != null) {
         transaction.rollback();
@@ -61,7 +62,7 @@ public class Service<Entity> {
     }
   }
 
-  public void update(Entity entity) throws Exception{
+  public void update(Entity entity) throws Exception {
     Transaction transaction = null;
 
     try {
@@ -77,7 +78,7 @@ public class Service<Entity> {
     }
   }
 
-  public void delete(Integer id){
+  public void delete(Integer id) {
     Transaction transaction = null;
 
     try {
@@ -90,7 +91,7 @@ public class Service<Entity> {
         transaction.rollback();
       }
       e.printStackTrace();
-      //throw e;
+      // throw e;
     }
   }
 }
