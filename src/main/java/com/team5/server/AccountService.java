@@ -8,17 +8,19 @@ import org.hibernate.Transaction;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.List;
+
 public class AccountService {
     private Class<Account> type;
 
-    public List<Account> getByUserDocumentId(int userId) throws Exception {
+    public List<Account> getByUserId(int userId) throws Exception {
         Transaction transaction = null;
 
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             Criteria cr = session.createCriteria(Account.class);
             cr.add(Restrictions.eq("fk_user", userId));
-            return (Account) cr.list();
+            return cr.list();
 
         } catch (Exception e) {
             if (transaction != null) {

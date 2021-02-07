@@ -11,15 +11,17 @@ public class Service<Entity> {
 
   public Service(Class<Entity> type) { this.type = type; }
 
-  public void insert(Entity entity) throws Exception {
+  public int insert(Entity entity) throws Exception {
     Transaction transaction = null;
 
     try {
       Session session = HibernateUtil.getSessionFactory().openSession();
       transaction = session.beginTransaction();
 
-      session.save(entity);
+      int id = (Integer) session.save(entity);
       transaction.commit();
+
+      return id;
     } catch (Exception e) {
       if (transaction != null) {
         transaction.rollback();

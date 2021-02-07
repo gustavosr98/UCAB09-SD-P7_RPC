@@ -4,21 +4,23 @@
 - Apache Maven v3.6.0+
 
 ## Instalation of requirments
-```bash 
+
+```bash
   sudo apt install default-jdk
   java -version
 ```
 
-```bash 
+```bash
   sudo apt install maven
   mvn -version
 ```
 
 # Run
-```bash 
+
+```bash
   mvn compile
   mvn exec:java
-  mvn exec:java -Dexec.mainClass=com.team5.Client
+  mvn exec:java -Dexec.mainClass=com.team5.client.Client
 ```
 
 You should see Hello World!
