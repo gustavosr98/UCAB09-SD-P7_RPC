@@ -19,9 +19,9 @@ public class Server {
     try {
       Remote comp = new HolaImpl();
       Registry registry = LocateRegistry.getRegistry();
-      UnicastRemoteObject.exportObject((Remote) comp, 0);
+      Hola stub = (Hola) UnicastRemoteObject.exportObject(comp, 1099);
       
-      registry.rebind("objetoHola", comp);
+      registry.rebind("objetoHola", stub);
     } catch (RemoteException ex) {
       ex.printStackTrace();
       return;
