@@ -3,7 +3,7 @@ package com.team5.server;
 import com.team5.entities.Person;
 
 public class Server {
-  public static void main( String[] args ){
+  public static void main( String[] args ) throws Exception {
     printRunningMessage();
     Service <Person> userService = new Service<Person>(Person.class);
     Person personToInsert = new Person("Gustavo Sanchez", "Tato");

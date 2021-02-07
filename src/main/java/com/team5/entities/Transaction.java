@@ -2,6 +2,8 @@ package com.team5.entities;
 
 import javax.persistence.*;
 
+import java.util.Date;
+
 @Entity
 public class Transaction {
     @Id

@@ -11,7 +11,7 @@ public class Service<Entity> {
 
   public Service(Class<Entity> type) { this.type = type; }
 
-  public void insert(Entity entity){
+  public void insert(Entity entity) throws Exception {
     Transaction transaction = null;
 
     try {
@@ -25,10 +25,11 @@ public class Service<Entity> {
         transaction.rollback();
       }
       e.printStackTrace();
+      throw e;
     }
   }
 
-  public List <Entity> getAll(){
+  public List <Entity> getAll() throws Exception {
     Transaction transaction = null;
 
     try {
@@ -39,11 +40,12 @@ public class Service<Entity> {
       if (transaction != null) {
         transaction.rollback();
       }
+      e.printStackTrace();
       throw e;
     }
   }
 
-  public Entity get(Integer id){
+  public Entity get(Integer id) throws Exception {
     Transaction transaction = null;
 
     try {
@@ -54,11 +56,12 @@ public class Service<Entity> {
       if (transaction != null) {
         transaction.rollback();
       }
+      e.printStackTrace();
       throw e;
     }
   }
 
-  public void update(Entity entity){
+  public void update(Entity entity) throws Exception{
     Transaction transaction = null;
 
     try {
@@ -69,9 +72,9 @@ public class Service<Entity> {
       if (transaction != null) {
         transaction.rollback();
       }
+      e.printStackTrace();
       throw e;
     }
-
   }
 
   public void delete(Integer id){
@@ -86,9 +89,8 @@ public class Service<Entity> {
       if (transaction != null) {
         transaction.rollback();
       }
-      throw e;
+      e.printStackTrace();
+      //throw e;
     }
   }
-
-
 }
