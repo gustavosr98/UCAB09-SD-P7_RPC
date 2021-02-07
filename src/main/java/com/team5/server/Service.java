@@ -90,7 +90,6 @@ public class Service<Entity> {
         transaction.rollback();
       }
       e.printStackTrace();
-      //throw e;
     }
   }
 }

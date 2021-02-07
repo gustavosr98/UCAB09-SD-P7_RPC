@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "transaction")
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,21 +21,29 @@ public class Transaction {
     @Column(name="description")
     private String description;
 
-    @Column(name="fk_expense_account")
-    private int expenseAccount;
+    @Column(name="type")
+    private String type;
 
-    @Column(name="fk_income_account")
-    private int incomeAccount;
+    @ManyToOne()
+    @JoinColumn(name="fk_source_account", nullable=true)
+    private Account sourceAccount;
 
-    public Transaction(float amount, Date date, String description, int expenseAccount, int incomeAccount) {
+    @ManyToOne()
+    @JoinColumn(name="fk_destination_account", nullable=true)
+    private Account destinationAccount;
+
+    public Transaction(float amount, Date date, String description, String type, Account sourceAccount, Account destinationAccount) {
         this.amount = amount;
         this.date = date;
         this.description = description;
-        this.expenseAccount = expenseAccount;
-        this.incomeAccount = incomeAccount;
+        this.type = type;
+        this.sourceAccount = sourceAccount;
+        this.destinationAccount = destinationAccount;
     }
 
-    @Id
+    public Transaction() {
+    }
+
     public int getId() {
         return id;
     }
@@ -67,19 +76,27 @@ public class Transaction {
         this.description = description;
     }
 
-    public int getExpenseAccount() {
-        return expenseAccount;
+    public String getType() {
+        return type;
     }
 
-    public void setExpenseAccount(int expenseAccount) {
-        this.expenseAccount = expenseAccount;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public int getIncomeAccount() {
-        return incomeAccount;
+    public Account getSourceAccount() {
+        return sourceAccount;
     }
 
-    public void setIncomeAccount(int incomeAccount) {
-        this.incomeAccount = incomeAccount;
+    public void setSourceAccount(Account sourceAccount) {
+        this.sourceAccount = sourceAccount;
+    }
+
+    public Account getDestinationAccount() {
+        return destinationAccount;
+    }
+
+    public void setDestinationAccount(Account destinationAccount) {
+        this.destinationAccount = destinationAccount;
     }
 }

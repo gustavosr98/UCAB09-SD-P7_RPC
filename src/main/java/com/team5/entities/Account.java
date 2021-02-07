@@ -2,7 +2,10 @@ package com.team5.entities;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 @Entity
+@Table(name = "account")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,19 +15,28 @@ public class Account {
     @Column(name="number")
     private int number;
 
-    @Column(name= "current_balance")
+    @Column(name="current_balance")
     private float currentBalance;
 
-    @Column(name="fk_user")
-    private int user;
+    @ManyToOne()
+    @JoinColumn(name="fk_user")
+    private UserBank userBank;
 
-    public Account(int number, float currentBalance, int user) {
+    @OneToMany(mappedBy="sourceAccount")
+    private List<Transaction> expenseTransactions;
+
+    @OneToMany(mappedBy="destinationAccount")
+    private List<Transaction> incomeTransactions;
+
+    public Account(int number, float currentBalance, UserBank userBank) {
         this.number = number;
         this.currentBalance = currentBalance;
-        this.user = user;
+        this.userBank = userBank;
     }
 
-    @Id
+    public Account() {
+    }
+
     public int getId() {
         return id;
     }
@@ -49,11 +61,11 @@ public class Account {
         this.currentBalance = currentBalance;
     }
 
-    public int getUser() {
-        return user;
+    public UserBank getUser() {
+        return userBank;
     }
 
-    public void setUser(int user) {
-        this.user = user;
+    public void setUser(UserBank userBank) {
+        this.userBank = userBank;
     }
 }

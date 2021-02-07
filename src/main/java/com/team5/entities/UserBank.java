@@ -2,8 +2,11 @@ package com.team5.entities;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 @Entity
-public class User {
+@Table(name = "user_bank")
+public class UserBank {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
@@ -12,7 +15,7 @@ public class User {
     @Column(name="document_id")
     private String documentId;
 
-    @Column(name= "name")
+    @Column(name="name")
     private String name;
 
     @Column(name="username")
@@ -21,14 +24,19 @@ public class User {
     @Column(name="password")
     private String password;
 
-    public User(String documentId, String name, String username, String password) {
+    @OneToMany(mappedBy="userBank")
+    private List<Account> accounts;
+
+    public UserBank(String documentId, String name, String username, String password) {
         this.documentId = documentId;
         this.name = name;
         this.username = username;
         this.password = password;
     }
 
-    @Id
+    public UserBank() {
+    }
+
     public int getId() {
         return id;
     }
