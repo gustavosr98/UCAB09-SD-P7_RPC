@@ -48,6 +48,18 @@ public class Transaction {
         this.destinationAccount = destinationAccount;
     }
 
+    public static Transaction createDeposit(float amount,String description, Account sourceAccount) {
+        return new Transaction(amount, new Date(), description, Type.DEPOSIT, sourceAccount, null );
+    }
+
+    public static Transaction createWithdraw(float amount,String description, Account sourceAccount) {
+        return new Transaction(amount, new Date(), description, Type.WITHDRAWAL, sourceAccount, null  );
+    }
+
+    public static Transaction createTransfer(float amount,String description, Account sourceAccount, Account destinationAccount) {
+        return new Transaction(amount, new Date(), description, Type.TRANSFERENCE, sourceAccount, destinationAccount  );
+    }
+
     public Transaction() {
     }
 
