@@ -13,16 +13,12 @@ import java.util.List;
 public class AccountService {
     private Class<Account> type;
 
-    public List<Account> getByUserId(int userId) throws Exception {
+    public List<Object> getByUserId(int userId) throws Exception {
         Transaction transaction = null;
 
         try {
-            System.out.println("CHAOOOO");
-
             Session session = HibernateUtil.getSessionFactory().openSession();
-            Criteria cr = session.createCriteria(Account.class);
-            cr.add(Restrictions.eq("fk_user", userId));
-            return cr.list();
+            return session.createSQLQuery("select ac.id, ac.current_balance, ac.fk_user from account ac where ac.fk_user=" + userId).list();
 
         } catch (Exception e) {
             if (transaction != null) {

@@ -22,14 +22,12 @@ public class OpenAccount {
         try {
             int id = sn.nextInt();
 
-            UserBank userBank = (UserBank) rmiObject.findUserById(id);
+            boolean userBank = rmiObject.existUser(id);
 
-            if (userBank == null) {
-                System.out.println("null");
-                return this.createUser();
-            } else {
-                System.out.println("no null");
+            if (userBank) {
                 return this.searchAccounts(id);
+            } else {
+                return this.createUser(id);
             }
 
         } catch (Exception e) {
@@ -39,7 +37,7 @@ public class OpenAccount {
         }
     }
 
-    public boolean createUser() {
+    public boolean createUser(int id) {
         try {
             Scanner sn = new Scanner(System.in);
             System.out.println("\n\n");
@@ -57,7 +55,7 @@ public class OpenAccount {
             System.out.println("\n");
             String password = sn.nextLine();
 
-            int id = rmiObject.createUser(name, username, password);
+            rmiObject.createUser(id, name, username, password);
 
             return this.createAccount(id);
         } catch (Exception e) {
@@ -68,8 +66,6 @@ public class OpenAccount {
 
     public boolean searchAccounts(int id) {
         try {
-            System.out.println("ID:" + id);
-
             int cant = rmiObject.findAccounts(id); 
             if (cant == 3) {
                 System.out.println("Ya posee el número máximo de cuentas = 3");

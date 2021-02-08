@@ -9,7 +9,9 @@ import com.team5.entities.Account;
 public interface RMIObject extends Remote {
   public UserBank findUserById(int Id) throws RemoteException, Exception;
 
-  public int createUser(String name, String username, String password) throws RemoteException, Exception;
+  public boolean existUser(int id) throws RemoteException, Exception;
+
+  public int createUser(int id, String name, String username, String password) throws RemoteException, Exception;
 
   public UserBank findUserByUserName(String username) throws RemoteException, Exception;
 

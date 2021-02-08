@@ -22,9 +22,24 @@ public class RMIObjectImpl implements RMIObject {
     }
   }
 
-  public int createUser(String name, String username, String password) throws RemoteException, Exception {
+  public boolean existUser(int id) throws RemoteException, Exception {
     try {
-      UserBank userBankToInsert = new UserBank(name, username, password);
+      UserBankService userBankService = new UserBankService();  
+      UserBank userBank = userBankService.getById(id);
+      if (userBank == null) {
+        return false;
+      } else {
+        return true;
+      }
+    } catch(Exception e) {
+      e.printStackTrace();
+      throw e;
+    }
+  }
+
+  public int createUser(int id, String name, String username, String password) throws RemoteException, Exception {
+    try {
+      UserBank userBankToInsert = new UserBank(id, name, username, password);
       Service <UserBank> userService = new Service<UserBank>(UserBank.class);
       return userService.insert(userBankToInsert);
     } catch(Exception e) {
@@ -46,10 +61,8 @@ public class RMIObjectImpl implements RMIObject {
 
   public int findAccounts(int userId) throws RemoteException, Exception {
     try {
-      System.out.println("HOLAAAA");
-      System.out.println(userId);
       AccountService accountService = new AccountService();  
-      List<Account> accounts = accountService.getByUserId(userId);
+      List<Object> accounts = accountService.getByUserId(userId);
       return accounts.size();
     } catch(Exception e) {
       e.printStackTrace();

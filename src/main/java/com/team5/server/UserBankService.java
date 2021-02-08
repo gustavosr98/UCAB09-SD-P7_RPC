@@ -11,7 +11,7 @@ import org.hibernate.criterion.Restrictions;
 public class UserBankService {
     private Class<UserBank> type;
 
-    public UserBank getById(Integer id) throws Exception {
+    public UserBank getById(int id) throws Exception {
         Transaction transaction = null;
 
         try {

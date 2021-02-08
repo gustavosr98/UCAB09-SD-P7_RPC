@@ -16,7 +16,7 @@ public class Account {
     private float currentBalance;
 
     @ManyToOne()
-    @JoinColumn(name="fk_user", nullable=false)
+    @JoinColumn(name="fk_user", nullable=false, referencedColumnName = "id")
     private UserBank userBank;
 
     @OneToMany(mappedBy="sourceAccount")

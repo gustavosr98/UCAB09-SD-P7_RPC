@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "user_bank")
 public class UserBank {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private int id;
 
@@ -24,7 +24,8 @@ public class UserBank {
     @OneToMany(mappedBy="userBank")
     private List<Account> accounts;
 
-    public UserBank(String name, String username, String password) {
+    public UserBank(int id, String name, String username, String password) {
+        this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
@@ -63,5 +64,13 @@ public class UserBank {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }
