@@ -5,8 +5,6 @@ import java.rmi.registry.Registry;
 
 import com.team5.rmiinterfaces.RMIObject;
 
-import org.graalvm.compiler.hotspot.amd64.AMD64HotSpotAddressLowering;
-
 import java.util.Scanner;
 
 public class Client {
@@ -39,24 +37,19 @@ public class Client {
       try {
         option = sn.nextInt();
 
-          switch(option){
-              case 1:
-                  openAccount.readDocumentId();
-                  break;
-              case 2:
-                TransactionsView transactionsView = new TransactionsView(rmiObject);
-                transactionsView.showMenu();
-                break;
-              case 3:
-                  out = true;
-                  break;
-              default:
-                  System.out.println("Opción Inválida");
-          }
-
-        } catch (Exception e) {
-            System.out.println("Debes insertar un número");
-            sn.next();
+        switch(option){
+          case 1:
+              openAccount.readDocumentId();
+              break;
+          case 2:
+            TransactionsView transactionsView = new TransactionsView(rmiObject);
+            transactionsView.showMenu();
+            break;
+          case 3:
+              out = true;
+              break;
+          default:
+              System.out.println("Opción Inválida");
         }
 
       } catch (Exception e) {
