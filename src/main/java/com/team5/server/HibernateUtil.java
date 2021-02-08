@@ -1,7 +1,6 @@
 
 package com.team5.server;
 
-import com.team5.entities.Person;
 import com.team5.entities.UserBank;
 import com.team5.entities.Account;
 import com.team5.entities.Transaction;
@@ -15,7 +14,6 @@ public class HibernateUtil {
   static {
     try {
       Configuration cfg = new Configuration().configure()
-        .addAnnotatedClass(Person.class)
         .addAnnotatedClass(UserBank.class)
         .addAnnotatedClass(Account.class)
         .addAnnotatedClass(Transaction.class)

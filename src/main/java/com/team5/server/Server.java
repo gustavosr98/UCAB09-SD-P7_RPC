@@ -1,6 +1,5 @@
 package com.team5.server;
 
-import com.team5.entities.Person;
 import com.team5.entities.UserBank;
 import com.team5.entities.Account;
 import java.rmi.RemoteException;
@@ -8,16 +7,23 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import com.team5.rmiinterfaces.Hola;
+import com.team5.rmiinterfaces.RMIObject;
 
 public class Server {
   public static void main(String[] args) throws Exception {
     try {
-      HolaImpl comp = new HolaImpl();
-      Hola stub = (Hola) UnicastRemoteObject.exportObject(comp, 0);
+      //HolaImpl comp = new HolaImpl();
+      //Hola stub = (Hola) UnicastRemoteObject.exportObject(comp, 0);
+      //Registry registry = LocateRegistry.getRegistry();
+
+      //registry.rebind("Hola", stub);
+
+      RMIObjectImpl comp = new RMIObjectImpl();
+      RMIObject stub = (RMIObject) UnicastRemoteObject.exportObject(comp, 0);
       Registry registry = LocateRegistry.getRegistry();
 
-      registry.rebind("Hola", stub);
+      registry.rebind("RMIObject", stub);
+
       printRunningMessage();
       new Server().hold();
     } catch (RemoteException ex) {
