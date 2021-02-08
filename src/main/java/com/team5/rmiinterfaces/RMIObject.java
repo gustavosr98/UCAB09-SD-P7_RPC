@@ -3,12 +3,23 @@ package com.team5.rmiinterfaces;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import com.team5.entities.UserBank;
 import com.team5.entities.Account;
-import com.team5.server.OpenAccount;
 
 public interface RMIObject extends Remote {
-  public OpenAccount openAccount = new OpenAccount();
+  public UserBank findUserById(int Id) throws RemoteException, Exception;
+
+  public boolean existUser(int id) throws RemoteException, Exception;
+
+  public int createUser(int id, String name, String username, String password) throws RemoteException, Exception;
+
+  public UserBank findUserByUserName(String username) throws RemoteException, Exception;
+
+  public int findAccounts(int userId) throws RemoteException, Exception;
+
+  public boolean validateUser(int userBankId, String username, String password) throws RemoteException, Exception;
+
+  public int createAccount(float currentBalance, int userBankId) throws RemoteException, Exception;
 
   public void remoteTransfer(Account origin, Account destiny, float amount) throws RemoteException;
-
 }

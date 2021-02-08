@@ -21,7 +21,7 @@ public class Client {
   }
 
   private static void welcomeMenu(RMIObject rmiObject) {
-    OpenAccount openAccount = new OpenAccount();
+    OpenAccount openAccount = new OpenAccount(rmiObject);
     Scanner sn = new Scanner(System.in);
     boolean out = false;
     int option;
@@ -39,19 +39,24 @@ public class Client {
       try {
         option = sn.nextInt();
 
-        switch (option) {
-          case 1:
-            openAccount.readDocumentId(rmiObject);
-            break;
-          case 2:
-            TransactionsView transactionsView = new TransactionsView(rmiObject);
-            transactionsView.showMenu();
-            break;
-          case 3:
-            out = true;
-            break;
-          default:
-            System.out.println("Opción Inválida");
+          switch(option){
+              case 1:
+                  openAccount.readDocumentId();
+                  break;
+              case 2:
+                TransactionsView transactionsView = new TransactionsView(rmiObject);
+                transactionsView.showMenu();
+                break;
+              case 3:
+                  out = true;
+                  break;
+              default:
+                  System.out.println("Opción Inválida");
+          }
+
+        } catch (Exception e) {
+            System.out.println("Debes insertar un número");
+            sn.next();
         }
 
       } catch (Exception e) {
