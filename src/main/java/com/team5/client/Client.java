@@ -5,6 +5,8 @@ import java.rmi.registry.Registry;
 
 import com.team5.rmiinterfaces.RMIObject;
 
+import org.graalvm.compiler.hotspot.amd64.AMD64HotSpotAddressLowering;
+
 import java.util.Scanner;
 
 public class Client {
