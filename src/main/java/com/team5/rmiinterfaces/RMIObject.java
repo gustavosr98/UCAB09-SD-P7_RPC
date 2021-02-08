@@ -9,10 +9,6 @@ import com.team5.server.OpenAccount;
 public interface RMIObject extends Remote {
   public OpenAccount openAccount = new OpenAccount();
 
-  public void deposit(Account account, float amount) throws RemoteException;
-
-  public void withdrawal(Account account, float amount) throws RemoteException;
-
-  public void tranference(Account origin, Account destiny, float amount) throws RemoteException;
+  public void transference(Account origin, Account destiny, float amount) throws RemoteException;
 
 }

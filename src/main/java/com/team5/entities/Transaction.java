@@ -49,15 +49,15 @@ public class Transaction {
     }
 
     public static Transaction createDeposit(float amount,String description, Account sourceAccount) {
-        Transaction dep = new Transaction();
-        dep.amount = amount;
-        dep.date = new Date();
-        dep.description = description;
-        dep.type = Type.DEPOSIT;
-        dep.sourceAccount = sourceAccount;
-        dep.destinationAccount = null;
+        return new Transaction(amount, new Date(), description, Type.DEPOSIT, sourceAccount, null );
+    }
 
-        return dep;
+    public static Transaction createWithdraw(float amount,String description, Account sourceAccount) {
+        return new Transaction(amount, new Date(), description, Type.WITHDRAWAL, sourceAccount, null  );
+    }
+
+    public static Transaction createTransfer(float amount,String description, Account sourceAccount, Account destinationAccount) {
+        return new Transaction(amount, new Date(), description, Type.TRANSFERENCE, sourceAccount, destinationAccount  );
     }
 
     public Transaction() {
