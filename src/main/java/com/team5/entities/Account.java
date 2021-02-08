@@ -9,8 +9,8 @@ import java.util.List;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="number")
-    private int number;
+    @Column(name="id")
+    private int id;
 
     @Column(name="current_balance", nullable=false)
     private float currentBalance;
@@ -33,12 +33,12 @@ public class Account {
     public Account() {
     }
 
-    public int getNumber() {
-        return number;
+    public int getId() {
+        return id;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public float getCurrentBalance() {

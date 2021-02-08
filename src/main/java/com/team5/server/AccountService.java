@@ -17,6 +17,8 @@ public class AccountService {
         Transaction transaction = null;
 
         try {
+            System.out.println("CHAOOOO");
+
             Session session = HibernateUtil.getSessionFactory().openSession();
             Criteria cr = session.createCriteria(Account.class);
             cr.add(Restrictions.eq("fk_user", userId));

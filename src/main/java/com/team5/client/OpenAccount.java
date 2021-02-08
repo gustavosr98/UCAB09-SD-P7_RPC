@@ -8,29 +8,38 @@ import com.team5.rmiinterfaces.RMIObject;
 import java.util.Scanner;
 
 public class OpenAccount {
-    public boolean readDocumentId(RMIObject rmiObject) {
+    private RMIObject rmiObject;
+
+    public OpenAccount(RMIObject rmiObject) {
+        this.rmiObject = rmiObject;
+    }
+
+    public boolean readDocumentId() {
         Scanner sn = new Scanner(System.in);
         System.out.println("\n\n");
         System.out.println("Escribe tu documento de identidad: ");
         System.out.println("\n");
         try {
-            int documentId = sn.nextInt();
+            int id = sn.nextInt();
 
-            UserBank userBank = rmiObject.openAccount.findUserByDocumentId(documentId);
+            UserBank userBank = (UserBank) rmiObject.findUserById(id);
 
             if (userBank == null) {
-                return this.createUser(rmiObject);
+                System.out.println("null");
+                return this.createUser();
             } else {
-                return this.searchAccounts(rmiObject, userBank);
+                System.out.println("no null");
+                return this.searchAccounts(id);
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Debes escribir un número");
             return false;
         }
     }
 
-    public boolean createUser(RMIObject rmiObject) {
+    public boolean createUser() {
         try {
             Scanner sn = new Scanner(System.in);
             System.out.println("\n\n");
@@ -48,25 +57,25 @@ public class OpenAccount {
             System.out.println("\n");
             String password = sn.nextLine();
 
-            int id = rmiObject.openAccount.createUser(name, username, password);
+            int id = rmiObject.createUser(name, username, password);
 
-            UserBank userBank = rmiObject.openAccount.findUserByDocumentId(id);
-
-            return this.createAccount(rmiObject, userBank);
+            return this.createAccount(id);
         } catch (Exception e) {
             System.out.println("Datos inválidos");
             return false;
         }
     }
 
-    public boolean searchAccounts(RMIObject rmiObject, UserBank userBank) {
+    public boolean searchAccounts(int id) {
         try {
-            int cant = rmiObject.openAccount.findAccounts(userBank.getDocumentId()); 
+            System.out.println("ID:" + id);
+
+            int cant = rmiObject.findAccounts(id); 
             if (cant == 3) {
                 System.out.println("Ya posee el número máximo de cuentas = 3");
                 return false;
             } else {
-                return this.validateUser(rmiObject, userBank);
+                return this.validateUser(id);
             }
         } catch (Exception e) {
             System.out.println("Datos inválidos");
@@ -74,7 +83,7 @@ public class OpenAccount {
         }
     }
 
-    public boolean validateUser(RMIObject rmiObject, UserBank userBank) {
+    public boolean validateUser(int id) {
         try {
             Scanner sn = new Scanner(System.in);
             System.out.println("\n\n");
@@ -87,8 +96,8 @@ public class OpenAccount {
             System.out.println("\n");
             String password = sn.nextLine();
 
-            if (username.equals(userBank.getUsername()) && password.equals(userBank.getPassword())) {
-                return this.createAccount(rmiObject, userBank);
+            if (rmiObject.validateUser(id, username, password)) {
+                return this.createAccount(id);
             } else {
                 System.out.println("Credenciales inválidas");
                 return false;
@@ -99,7 +108,7 @@ public class OpenAccount {
         }
     }
 
-    public boolean createAccount(RMIObject rmiObject, UserBank userBank) {
+    public boolean createAccount(int userBankId) {
         try {
             Scanner sn = new Scanner(System.in);
             System.out.println("\n\n");
@@ -107,7 +116,7 @@ public class OpenAccount {
             System.out.println("\n");
             float amount = sn.nextFloat();
 
-            int id = rmiObject.openAccount.createAccount(amount, userBank);
+            int id = rmiObject.createAccount(amount, userBankId);
 
             System.out.println("Cuenta creada exitosamente: " + id);
 

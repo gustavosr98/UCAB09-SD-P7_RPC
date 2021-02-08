@@ -9,8 +9,8 @@ import java.util.List;
 public class UserBank {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="document_id")
-    private int documentId;
+    @Column(name="id")
+    private int id;
 
     @Column(name="name", nullable=false)
     private String name;
@@ -30,12 +30,15 @@ public class UserBank {
         this.password = password;
     }
 
-    public int getDocumentId() {
-        return documentId;
+    public UserBank() {
     }
 
-    public void setDocumentId(int documentId) {
-        this.documentId = documentId;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

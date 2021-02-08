@@ -11,10 +11,6 @@ import com.team5.entities.UserBank;
 public class Server {
   public static void main(String[] args) throws Exception {
     try {
-
-      Service<UserBank> UserBankService = new Service<UserBank>(UserBank.class);
-      UserBankService.insert(new UserBank("A", "V", "C"));
-
       RMIObjectImpl comp = new RMIObjectImpl();
       RMIObject stub = (RMIObject) UnicastRemoteObject.exportObject(comp, 0);
       Registry registry = LocateRegistry.getRegistry();

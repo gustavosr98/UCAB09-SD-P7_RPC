@@ -29,7 +29,7 @@ public class Client {
   }
 
   private static void welcomeMenu(RMIObject rmiObject) {
-    OpenAccount openAccount = new OpenAccount();
+    OpenAccount openAccount = new OpenAccount(rmiObject);
     Scanner sn = new Scanner(System.in);
     boolean out = false;
     int option;
@@ -49,7 +49,7 @@ public class Client {
 
             switch(option){
                 case 1:
-                    openAccount.readDocumentId(rmiObject);
+                    openAccount.readDocumentId();
                     break;
                 case 2:
                     System.out.println("Has seleccionado la opcion 2");
